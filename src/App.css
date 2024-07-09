@@ -65,3 +65,7 @@
 .chain-button.right {
   right: -30px; /* Position the right arrow outside the container */
 }
+
+.chain-item.invisible {
+  visibility: hidden;
+}
