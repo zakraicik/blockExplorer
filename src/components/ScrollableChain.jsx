@@ -15,14 +15,14 @@ const ScrollableChain = () => {
   const nextSlide = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
-      scrollRef.current.scrollLeft += scrollRef.current.scrollWidth / 3;
+      scrollRef.current.scrollLeft += scrollRef.current.scrollWidth / 7;
     }
   };
 
   const prevSlide = () => {
     if (currentIndex < data.length - 1) {
       setCurrentIndex(currentIndex + 1);
-      scrollRef.current.scrollLeft -= scrollRef.current.scrollWidth / 3;
+      scrollRef.current.scrollLeft -= scrollRef.current.scrollWidth / 7;
     }
   };
 
@@ -40,7 +40,7 @@ const ScrollableChain = () => {
   }, []);
 
   return (
-    <div>
+    
       <div className="scrollable-chain-wrapper">
         <button onClick={prevSlide} className="chain-button left">
           &#10094;
@@ -60,7 +60,6 @@ const ScrollableChain = () => {
           &#10095;
         </button>
       </div>
-    </div>
   );
 };
 

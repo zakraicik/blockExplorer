@@ -1,26 +1,29 @@
 .App {
   text-align: center;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;  
   height: 100vh; 
-  background-color: #282c34;
+  width: 100%;
+  background-color: #ffffff;
 }
 
-.scrollable-chain-wrapper {
-  display: flex;
+ .scrollable-chain-wrapper {
+   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 80%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+  width: 50vw; 
+  height: 30vh;
+  margin: 0 auto;  
+} 
 
 .scrollable-chain-container {
   overflow: hidden;
-  width: calc(100% - 60px); /* Adjust the width to leave space for the arrows */
+  width: calc(100% - 80px);
+
+
 }
 
 .scrollable-chain {
@@ -28,7 +31,9 @@
   overflow-x: scroll;
   scroll-behavior: smooth;
   width: 100%;
-  direction: rtl;
+  padding: 40px; 
+  box-sizing: border-box;
+
 }
 
 .chain-item {
@@ -36,14 +41,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
-  background-color: #4caf50;
-  color: white;
+  height: 20vh;
+  background-color: #ebd7f7; 
+  color: #c082e6;
   font-size: 24px;
   font-weight: bold;
-  margin: 0 5px; /* Adjust margin as needed */
-  border-radius: 10px;
+  margin: 0 15px; /* Increased margin for more separation */
+  border-radius: 15px; /* Slightly larger border-radius for smoother edges */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.1); /* Shadow for floating effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
 }
+
+.chain-item:hover {
+  transform: translateY(-10px); /* Lift effect on hover */
+  box-shadow: 0 20px 40px rgba(192, 130, 230, 0.4), 0 12px 12px rgba(192, 130, 230, 0.3); /* Enhanced shadow on hover */
+}
+
+
+
 
 .chain-button {
   position: absolute;
@@ -52,7 +67,7 @@
   background: none;
   border: none;
   font-size: 2rem;
-  color: #4caf50;
+  color: #c082e6;
   cursor: pointer;
   z-index: 2;
   padding: 0 20px;
