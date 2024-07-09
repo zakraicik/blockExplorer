@@ -55,7 +55,7 @@ const ScrollableChain = ({ blockNumbers, setSelectedBlock }) => {
               className='chain-item'
               onClick={() => handleBlockClick(block, index)}
             >
-              <h3>{block.title}</h3>
+              <h3>{block.blockNumber}</h3>
             </div>
           ))}
           <div className='chain-item invisible'></div>{' '}
