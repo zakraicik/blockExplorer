@@ -9,24 +9,31 @@ const settings = {
   network: Network.ETH_MAINNET,
 };
 
+const numberBlocks = 5;
 
 const alchemy = new Alchemy(settings);
 
 function App() {
-  // const [blockNumber, setBlockNumber] = useState();
+  const [blockNumbers, setBlockNumbers] = useState([])
 
-  // useEffect(() => {
-  //   async function getBlockNumber() {
-  //     setBlockNumber(await alchemy.core.getBlockNumber());
-  //   }
+  useEffect(() => {
+    async function getBlockNumbers() {
+      const currentBlockNumber = await alchemy.core.getBlockNumber();
+      const blockNumbersArray = [];
+      for (let i = 0; i < numberBlocks; i++) {
+        blockNumbersArray.push({ id: numberBlocks-1-i, blockNumber: currentBlockNumber - i });
+      }
 
-  //   getBlockNumber();
-  // });
+      console.log(blockNumbersArray.reverse());
+      setBlockNumbers(blockNumbersArray);
+    }
+
+    getBlockNumbers();
+  }, []);
 
   return (
     <div className="App">
-      {/* <h1>Block Number: {blockNumber}</h1> */}
-        <ScrollableChain />
+        <ScrollableChain blockNumbers={blockNumbers}/>
     </div>
   );
 }
