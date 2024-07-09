@@ -41,11 +41,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20vh;
+  height:10vh;
   background-color: #ebd7f7; 
   color: #c082e6;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 12px;
   margin: 0 15px; /* Increased margin for more separation */
   border-radius: 15px; /* Slightly larger border-radius for smoother edges */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.1); /* Shadow for floating effect */
@@ -56,9 +55,6 @@
   transform: translateY(-10px); /* Lift effect on hover */
   box-shadow: 0 20px 40px rgba(192, 130, 230, 0.4), 0 12px 12px rgba(192, 130, 230, 0.3); /* Enhanced shadow on hover */
 }
-
-
-
 
 .chain-button {
   position: absolute;
