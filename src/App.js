@@ -1,41 +1,51 @@
-import { Alchemy, Network } from 'alchemy-sdk';
-import { useEffect, useState } from 'react';
-import ScrollableChain from './components/ScrollableChain';
+import { Alchemy, Network } from 'alchemy-sdk'
+import { useEffect, useState } from 'react'
+import ScrollableChain from './components/ScrollableChain'
 
-import './App.css';
+import './App.css'
 
 const settings = {
   apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
-  network: Network.ETH_MAINNET,
-};
-
-const numberBlocks = 5;
-
-const alchemy = new Alchemy(settings);
-
-function App() {
-  const [blockNumbers, setBlockNumbers] = useState([])
-
-  useEffect(() => {
-    async function getBlockNumbers() {
-      const currentBlockNumber = await alchemy.core.getBlockNumber();
-      const blockNumbersArray = [];
-      for (let i = 0; i < numberBlocks; i++) {
-        blockNumbersArray.push({ id: numberBlocks-1-i, blockNumber: currentBlockNumber - i });
-      }
-
-      console.log(blockNumbersArray.reverse());
-      setBlockNumbers(blockNumbersArray);
-    }
-
-    getBlockNumbers();
-  }, []);
-
-  return (
-    <div className="App">
-        <ScrollableChain blockNumbers={blockNumbers}/>
-    </div>
-  );
+  network: Network.ETH_MAINNET
 }
 
-export default App;
+const alchemy = new Alchemy(settings)
+
+function App () {
+  const [blockNumbers, setBlockNumbers] = useState([])
+  const [selectedBlock, setSelectedBlock] = useState(null)
+
+  useEffect(() => {
+    async function getBlockNumbers () {
+      const currentBlockNumber = await alchemy.core.getBlockNumber()
+      const blockNumbersArray = []
+      for (let i = 0; i < 5; i++) {
+        blockNumbersArray.push({ id: i, title: currentBlockNumber - i })
+      }
+
+      setBlockNumbers(blockNumbersArray.reverse())
+    }
+
+    getBlockNumbers()
+  }, [])
+
+  return (
+    <div className='App'>
+      <div className='container'>
+        <ScrollableChain
+          blockNumbers={blockNumbers}
+          setSelectedBlock={setSelectedBlock}
+        />
+        <div className='information-container'>
+          {selectedBlock ? (
+            <p>Information for {selectedBlock.title}</p>
+          ) : (
+            <p>Select a block to see more information</p>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default App
