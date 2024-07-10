@@ -1,7 +1,7 @@
-import { Alchemy, Network } from 'alchemy-sdk'
+import { Alchemy, Network, Utils } from 'alchemy-sdk'
 import { useEffect, useState, useCallback } from 'react'
 import ScrollableChain from './components/ScrollableChain'
-import { getBlockDetails } from './helper/blockDetails'
+import { getBlockDetails } from './helper/alchemyHelpers'
 
 import './App.css'
 
@@ -16,7 +16,9 @@ function App () {
   const [blockNumbers, setBlockNumbers] = useState([])
   const [selectedBlock, setSelectedBlock] = useState(null)
   const [blockDetails, setBlockDetails] = useState(null)
+  const [blockTransactionDetails, setBlockTransactionDetails] = useState(null)
 
+  // Block numbers
   useEffect(() => {
     async function getBlockNumbers () {
       const currentBlockNumber = await alchemy.core.getBlockNumber()
@@ -31,9 +33,10 @@ function App () {
     getBlockNumbers()
   }, [])
 
+  // Block Details
   const fetchBlockDetails = useCallback(async () => {
     if (selectedBlock) {
-      const details = await getBlockDetails(selectedBlock.title, alchemy)
+      const details = await getBlockDetails(selectedBlock.blockNumber, alchemy)
       console.log('Block Details:', details)
       setBlockDetails(details)
     }
@@ -49,13 +52,40 @@ function App () {
         <ScrollableChain
           blockNumbers={blockNumbers}
           setSelectedBlock={setSelectedBlock}
+          selectedBlock={selectedBlock} // Pass selectedBlock as a prop
         />
-        <div className='information-container'>
-          {selectedBlock ? (
-            <p>Information for {selectedBlock.blockNumber}</p>
-          ) : (
-            <p>Select a block to see more information</p>
-          )}
+        <div class='parent-container'>
+          <div className='information-container'>
+            {selectedBlock ? (
+              <>
+                <div className='block-number'>
+                  Block #{selectedBlock.blockNumber}
+                </div>
+                {blockDetails ? (
+                  <>
+                    <p>Timestamp: {blockDetails.timestamp}</p>
+                    <p>Gas Limit: {Number(blockDetails.gasLimit._hex)}</p>
+                    <p>Gas Used: {Number(blockDetails.gasUsed._hex)}</p>
+                    <p>
+                      Base Fee Per Gas:{' '}
+                      {Utils.formatUnits(
+                        Number(blockDetails.baseFeePerGas._hex),
+                        'ether'
+                      )}
+                    </p>
+                    <p>
+                      Number Transactions: {blockDetails.transactions.length}
+                    </p>
+                    <p>Nonce: {Number(blockDetails.nonce)}</p>
+                  </>
+                ) : (
+                  <p>Loading block details...</p>
+                )}
+              </>
+            ) : (
+              <p>Select a block to see more information</p>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -1,20 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-const ScrollableChain = ({ blockNumbers, setSelectedBlock }) => {
+const ScrollableChain = ({ blockNumbers, setSelectedBlock, selectedBlock }) => {
+  // Add selectedBlock here
   const [currentIndex, setCurrentIndex] = useState(0)
   const scrollRef = useRef(null)
 
   const nextSlide = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1)
+    if (currentIndex < blockNumbers.length - 1) {
+      setCurrentIndex(currentIndex + 1)
       scrollRef.current.scrollLeft +=
         scrollRef.current.scrollWidth / (blockNumbers.length + 2)
     }
   }
 
   const prevSlide = () => {
-    if (currentIndex < blockNumbers.length - 1) {
-      setCurrentIndex(currentIndex + 1)
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1)
       scrollRef.current.scrollLeft -=
         scrollRef.current.scrollWidth / (blockNumbers.length + 2)
     }
@@ -47,19 +48,21 @@ const ScrollableChain = ({ blockNumbers, setSelectedBlock }) => {
       </button>
       <div className='scrollable-chain-container'>
         <div className='scrollable-chain' ref={scrollRef}>
-          <div className='chain-item invisible'></div>{' '}
-          {/* Invisible padding block */}
+          <div className='chain-item invisible'></div>
           {blockNumbers.map((block, index) => (
             <div
               key={block.id}
-              className='chain-item'
+              className={`chain-item ${
+                selectedBlock && selectedBlock.blockNumber === block.blockNumber
+                  ? 'selected'
+                  : 'unselected'
+              }`}
               onClick={() => handleBlockClick(block, index)}
             >
-              <h3>{block.blockNumber}</h3>
+              #{block.blockNumber}
             </div>
           ))}
-          <div className='chain-item invisible'></div>{' '}
-          {/* Invisible padding block */}
+          <div className='chain-item invisible'></div>
         </div>
       </div>
       <button onClick={nextSlide} className='chain-button right'>
