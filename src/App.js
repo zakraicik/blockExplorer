@@ -4,7 +4,7 @@ import ScrollableChain from './components/ScrollableChain'
 import BlockSummary from './components/BlockSummary'
 import TransactionSummary from './components/TransactionSummary'
 
-import { getBlockDetails, getTransactionDetails } from './helper/alchemyHelpers'
+import { getBlockDetails, getBlockTransactions } from './helper/alchemyHelpers'
 
 import './App.css'
 
@@ -44,14 +44,27 @@ function App () {
       )
       console.log('Block Details:', blockDetails)
       setBlockDetails(blockDetails)
-      console.log('Block Transactions', blockDetails.transactions)
-      setTransactionDetails(blockDetails.transactions)
+    }
+  }, [selectedBlock])
+
+  const fetchBlockTransactions = useCallback(async () => {
+    if (selectedBlock) {
+      const blockTransactions = await getBlockTransactions(
+        selectedBlock.blockNumber,
+        alchemy
+      )
+      console.log('Block Transactions', blockTransactions)
+      setTransactionDetails(blockTransactions)
     }
   }, [selectedBlock])
 
   useEffect(() => {
     fetchBlockDetails()
   }, [fetchBlockDetails])
+
+  useEffect(() => {
+    fetchBlockTransactions()
+  }, [fetchBlockTransactions])
 
   return (
     <div className='App'>

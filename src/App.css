@@ -6,7 +6,7 @@
   align-items: center;
   min-height: 100vh; /* Ensure it takes the full height of the viewport */
   width: 100%;
-  background-color: #ffffff;
+  background-color: #10002b;
 }
 
 .scrollable-chain-parent-container {
@@ -80,9 +80,10 @@
 
 /* New CSS classes for gradients */
 .chain-item.selected {
-  background: linear-gradient(135deg, #c77dff, #3c096c);
-  box-shadow: 0 15px 30px rgba(192, 130, 230, 0.6),
-    0 10px 10px rgba(192, 130, 230, 0.4);
+  background: linear-gradient(135deg, #e0aaff, #240046);
+  box-shadow: 0 0 10px rgba(224, 170, 255, 0.3),
+    0 0 30px rgba(224, 170, 255, 0.2);
+
   font-size: 20px;
   color: #ffffff;
   font-weight: bolder;
@@ -116,12 +117,11 @@
 .information-container {
   position: relative; /* Required for absolutely positioning the block number */
   padding: 20px;
-  background: #ffffff;
+  background: #240046;
   border-radius: 10px;
-  border: 0.75px solid #c77dff;
-  box-shadow: 0 15px 30px rgba(192, 130, 230, 0.3),
-    0 10px 30px rgba(192, 130, 230, 0.2);
-  width: 100%; /* Make each information container take the full width of the parent */
+  box-shadow: 0 0 10px rgba(224, 170, 255, 0.3),
+    0 0 30px rgba(224, 170, 255, 0.2);
+  width: 90%; /* Make each information container take the full width of the parent */
   box-sizing: border-box; /* Ensure padding and border are included in the width */
   text-align: left; /* Align text to the left */
 }
@@ -133,12 +133,19 @@
   padding: 5px 10px; /* Optional: padding for better readability */
   font-weight: bold; /* Optional: bold text */
   font-size: 20px;
-  color: #3c096c;
+  color: #ffffff;
+}
+
+.divider {
+  border: none;
+  height: 1px;
+  background-color: #ccc; /* Change to the color you prefer */
+  margin-top: 20px 0;
 }
 
 .block-timestamp {
   font-style: italic;
-  color: #3c096c;
+  color: #e0aaff;
   font-size: 14px;
   padding-top: 5px;
 }
@@ -148,14 +155,14 @@
 }
 
 .block-label {
-  font-weight: bold;
+  font-weight: normal;
   font-size: 12px;
-  color: #3c096c; /* Customize the color of the label */
+  color: #ffffff; /* Customize the color of the label */
   margin-right: 5px; /* Add some space between the label and the value */
 }
 
 .block-value {
-  font-weight: normal;
+  font-weight: bold;
   font-size: 12px;
-  color: #3c096c; /* Customize the color of the value */
+  color: #e0aaff; /* Customize the color of the value */
 }

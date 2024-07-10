@@ -10,6 +10,7 @@ const BlockSummary = ({ selectedBlock, blockDetails }) => {
       {selectedBlock ? (
         <>
           <div className='block-number'>Block #{selectedBlock.blockNumber}</div>
+
           {blockDetails ? (
             <>
               <p className='block-timestamp'>
@@ -50,6 +51,16 @@ const BlockSummary = ({ selectedBlock, blockDetails }) => {
                     Number(blockDetails.baseFeePerGas._hex),
                     'ether'
                   )}
+                </span>
+              </p>
+
+              <p className='block-details'>
+                <span className='block-label'>Burnt Fees:</span>
+                <span className='block-value'>
+                  {Utils.formatUnits(
+                    Number(blockDetails.baseFeePerGas._hex),
+                    'ether'
+                  ) * Number(blockDetails.gasUsed._hex)}
                 </span>
               </p>
 
