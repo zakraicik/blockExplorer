@@ -4,9 +4,9 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* Center content vertically */
   align-items: center;
-  height: 100vh;
+  min-height: 100vh; /* Ensure it takes the full height of the viewport */
   width: 100%;
   background-color: #ffffff;
 }
@@ -16,7 +16,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 50vw;
+  width: 80vw;
   height: 30vh;
   margin: 0 auto;
 }
@@ -95,16 +95,34 @@
   font-weight: bold;
 }
 
-.parent-container {
+/* Row container for aligning information and extra containers side by side */
+.row-container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Align children to the start of the container */
-  width: 100%; /* Ensure the parent container takes full width */
+  justify-content: space-between; /* Adjust this to space the containers */
+  align-items: flex-start; /* Align items at the top */
+  width: 80vw; /* Adjust width as needed */
+  margin-top: 20px; /* Add some spacing from the ScrollableChain */
+}
+
+.information-parent-container,
+.extra-container {
+  flex: 1; /* Allow the containers to take up equal space */
+  margin-right: 10px; /* Optional: Add spacing between the containers */
+}
+
+.extra-container {
+  background: #f9f9f9; /* Example background color */
+  padding: 20px;
+  border-radius: 10px;
+  border: 0.75px solid #c77dff;
+  box-shadow: 0 15px 30px rgba(192, 130, 230, 0.3),
+    0 10px 30px rgba(192, 130, 230, 0.2);
+  text-align: left; /* Example text alignment */
 }
 
 .information-container {
   position: relative; /* Required for absolutely positioning the block number */
-  margin-top: 20px;
+  margin-top: 0; /* Remove top margin */
   padding: 20px;
   background: #ffffff;
   border-radius: 10px;
@@ -124,4 +142,28 @@
   font-weight: bold; /* Optional: bold text */
   font-size: 20px;
   color: #3c096c;
+}
+
+.block-timestamp {
+  font-style: italic;
+  color: #3c096c;
+  font-size: 14px;
+  padding-top: 5px;
+}
+
+.block-details {
+  margin: 10px 0; /* Add spacing between items */
+}
+
+.block-label {
+  font-weight: bold;
+  font-size: 12px;
+  color: #3c096c; /* Customize the color of the label */
+  margin-right: 5px; /* Add some space between the label and the value */
+}
+
+.block-value {
+  font-weight: normal;
+  font-size: 12px;
+  color: #3c096c; /* Customize the color of the value */
 }
