@@ -16,60 +16,59 @@ const BlockSummary = ({ selectedBlock, blockDetails }) => {
               <p className='block-timestamp'>
                 {formatTimestamp(blockDetails.timestamp)}
               </p>
-
-              <p className='block-details'>
-                <span className='block-label'>Mined By:</span>
-                <span className='block-value'>
-                  {formatAddress(blockDetails.miner)}
-                </span>
-              </p>
-
-              <p className='block-details'>
-                <span className='block-label'>Number Transactions:</span>
-                <span className='block-value'>
-                  {blockDetails.transactions.length.toLocaleString()}
-                </span>
-              </p>
-
-              <p className='block-details'>
-                <span className='block-label'>Gas Limit:</span>
-                <span className='block-value'>
-                  {Number(blockDetails.gasLimit._hex).toLocaleString()}
-                </span>
-              </p>
-              <p className='block-details'>
-                <span className='block-label'>Gas Used:</span>
-                <span className='block-value'>
-                  {Number(blockDetails.gasUsed._hex).toLocaleString()}
-                </span>
-              </p>
-
-              <p className='block-details'>
-                <span className='block-label'>Base Fee Per Gas:</span>
-                <span className='block-value'>
-                  {Utils.formatUnits(
-                    Number(blockDetails.baseFeePerGas._hex),
-                    'ether'
-                  )}
-                </span>
-              </p>
-
-              <p className='block-details'>
-                <span className='block-label'>Burnt Fees:</span>
-                <span className='block-value'>
-                  {Utils.formatUnits(
-                    Number(blockDetails.baseFeePerGas._hex),
-                    'ether'
-                  ) * Number(blockDetails.gasUsed._hex)}
-                </span>
-              </p>
-
-              <p className='block-details'>
-                <span className='block-label'>Nonce: </span>
-                <span className='block-value'>
-                  {Number(blockDetails.nonce)}
-                </span>
-              </p>
+              <hr className='divider'></hr>;
+              <table>
+                <tbody>
+                  <tr>
+                    <td className='block-label'>Mined By:</td>
+                    <td className='block-value'>
+                      {formatAddress(blockDetails.miner)}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='block-label'>Number Transactions:</td>
+                    <td className='block-value'>
+                      {blockDetails.transactions.length.toLocaleString()}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='block-label'>Gas Limit:</td>
+                    <td className='block-value'>
+                      {Number(blockDetails.gasLimit._hex).toLocaleString()}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='block-label'>Gas Used:</td>
+                    <td className='block-value'>
+                      {Number(blockDetails.gasUsed._hex).toLocaleString()}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='block-label'>Base Fee Per Gas:</td>
+                    <td className='block-value'>
+                      {Utils.formatUnits(
+                        Number(blockDetails.baseFeePerGas._hex),
+                        'ether'
+                      )}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='block-label'>Burnt Fees:</td>
+                    <td className='block-value'>
+                      {Utils.formatUnits(
+                        Number(blockDetails.baseFeePerGas._hex),
+                        'ether'
+                      ) * Number(blockDetails.gasUsed._hex)}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='block-label'>Nonce:</td>
+                    <td className='block-value'>
+                      {Number(blockDetails.nonce)}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </>
           ) : (
             <p>Loading block details...</p>

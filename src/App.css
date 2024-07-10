@@ -2,10 +2,9 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center content vertically */
+  justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Ensure it takes the full height of the viewport */
-  width: 100%;
+  min-height: 100vh;
   background-color: #10002b;
 }
 
@@ -100,18 +99,17 @@
 /* Row container for aligning information and extra containers side by side */
 .row-container {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center; /* Center the containers */
+  align-items: flex-start; /* Align the containers at the top */
   width: 80vw;
   margin-top: 20px;
+  gap: 20px; /* Add space between the containers */
 }
 
 .information-parent-container {
-  flex: 1; /* Allow the containers to take up equal space */
-  margin-right: 10px; /* Optional: Add spacing between the containers */
+  flex: 0 0 auto; /* Allow the containers to take only the width of their content */
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .information-container {
@@ -121,7 +119,7 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(224, 170, 255, 0.3),
     0 0 30px rgba(224, 170, 255, 0.2);
-  width: 90%; /* Make each information container take the full width of the parent */
+  width: 500px; /* Set a specific width */
   box-sizing: border-box; /* Ensure padding and border are included in the width */
   text-align: left; /* Align text to the left */
 }
@@ -139,8 +137,8 @@
 .divider {
   border: none;
   height: 1px;
-  background-color: #ccc; /* Change to the color you prefer */
-  margin-top: 20px 0;
+  background-color: #5a189a; /* Change to the color you prefer */
+  margin-top: 10px 0 20px 0; /* Adjust the top margin to ensure it's below the block number */
 }
 
 .block-timestamp {
