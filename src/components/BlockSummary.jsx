@@ -1,6 +1,6 @@
 import React from 'react'
 import { Utils } from 'alchemy-sdk'
-import { formatTimestamp, truncateAddress } from '../helper/alchemyHelpers'
+import { formatTimestamp, formatAddress } from '../helper/formatHelpers'
 
 import '../App.css'
 
@@ -19,7 +19,7 @@ const BlockSummary = ({ selectedBlock, blockDetails }) => {
               <p className='block-details'>
                 <span className='block-label'>Mined By:</span>
                 <span className='block-value'>
-                  {truncateAddress(blockDetails.miner)}
+                  {formatAddress(blockDetails.miner)}
                 </span>
               </p>
 

@@ -2,8 +2,9 @@ import { Alchemy, Network } from 'alchemy-sdk'
 import { useEffect, useState, useCallback } from 'react'
 import ScrollableChain from './components/ScrollableChain'
 import BlockSummary from './components/BlockSummary'
+import TransactionSummary from './components/TransactionSummary'
 
-import { getBlockDetails } from './helper/alchemyHelpers'
+import { getBlockDetails, getTransactionDetails } from './helper/alchemyHelpers'
 
 import './App.css'
 
@@ -18,7 +19,7 @@ function App () {
   const [blockNumbers, setBlockNumbers] = useState([])
   const [selectedBlock, setSelectedBlock] = useState(null)
   const [blockDetails, setBlockDetails] = useState(null)
-  // const [blockTransactionDetails, setBlockTransactionDetails] = useState(null)
+  const [transactionDetails, setTransactionDetails] = useState(null)
 
   // Block numbers
   useEffect(() => {
@@ -35,12 +36,16 @@ function App () {
     getBlockNumbers()
   }, [])
 
-  // Block Details
   const fetchBlockDetails = useCallback(async () => {
     if (selectedBlock) {
-      const details = await getBlockDetails(selectedBlock.blockNumber, alchemy)
-      console.log('Block Details:', details)
-      setBlockDetails(details)
+      const blockDetails = await getBlockDetails(
+        selectedBlock.blockNumber,
+        alchemy
+      )
+      console.log('Block Details:', blockDetails)
+      setBlockDetails(blockDetails)
+      console.log('Block Transactions', blockDetails.transactions)
+      setTransactionDetails(blockDetails.transactions)
     }
   }, [selectedBlock])
 
@@ -65,10 +70,7 @@ function App () {
           />
         </div>
         <div className='information-parent-container'>
-          <BlockSummary
-            selectedBlock={selectedBlock}
-            blockDetails={blockDetails}
-          />
+          <TransactionSummary selectedBlock={selectedBlock} />
         </div>
       </div>
     </div>
