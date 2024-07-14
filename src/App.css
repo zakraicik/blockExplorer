@@ -8,6 +8,17 @@
   background-color: #10002b;
 }
 
+.content-container {
+  width: 80vw;
+  height: 80vh; /* Fixed height for the content container */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+
 .scrollable-chain-parent-container {
   width: 80vw;
   height: 15vh;
@@ -79,20 +90,22 @@
 
 /* New CSS classes for gradients */
 .chain-item.selected {
-  background: linear-gradient(135deg, #e0aaff, #240046);
+  /* background: linear-gradient(135deg, #e0aaff, #240046); */
+  background: #360568;
   box-shadow: 0 0 10px rgba(224, 170, 255, 0.3),
     0 0 30px rgba(224, 170, 255, 0.2);
-
+  border: 1px solid #e0aaff; /* Added border */
   font-size: 20px;
   color: #ffffff;
   font-weight: bolder;
 }
 
 .chain-item.unselected {
-  background: #ffffff;
+  background: #240046;
+  /* background: linear-gradient(135deg, #fff, #f4ebff); */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.1);
   font-size: 12px;
-  color: #c082e6;
+  color: #ffffff;
   font-weight: bold;
 }
 
@@ -113,32 +126,40 @@
 }
 
 .information-container {
-  position: relative; /* Required for absolutely positioning the block number */
+  position: relative;
   padding: 20px;
   background: #240046;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(224, 170, 255, 0.3),
     0 0 30px rgba(224, 170, 255, 0.2);
-  width: 500px; /* Set a specific width */
-  box-sizing: border-box; /* Ensure padding and border are included in the width */
-  text-align: left; /* Align text to the left */
+  width: 500px;
+  box-sizing: border-box;
+  text-align: left;
+  cursor: pointer;
+  transition: padding 0.5s ease-in-out;
+  overflow: hidden;
+  max-height: 300px;
+}
+
+.information-container.collapsed {
+  max-height: 80px;
+  padding-bottom: 0;
+  transition: max-height 1s ease-in-out, padding 0.5s ease-in-out; /* Slow down collapse */
+}
+
+.information-container.expanded {
+  max-height: 1000px; /* Adjust this value to be large enough to accommodate the expanded content */
+  transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Speed up expand */
 }
 
 .block-number {
-  position: absolute; /* Position it absolutely within the information-container */
-  top: 10px; /* Adjust the top and left values as needed */
-  left: 10px; /* Move to the left instead of right */
-  padding: 5px 10px; /* Optional: padding for better readability */
-  font-weight: bold; /* Optional: bold text */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  font-weight: bold;
   font-size: 20px;
   color: #ffffff;
-}
-
-.divider {
-  border: none;
-  height: 1px;
-  background-color: #5a189a; /* Change to the color you prefer */
-  margin-top: 10px 0 20px 0; /* Adjust the top margin to ensure it's below the block number */
 }
 
 .block-timestamp {
@@ -148,19 +169,55 @@
   padding-top: 5px;
 }
 
-.block-details {
-  margin: 10px 0; /* Add spacing between items */
+.divider {
+  border: none;
+  height: 1px;
+  background-color: #5a189a;
+  margin: 10px 0 20px 0;
 }
 
 .block-label {
   font-weight: normal;
   font-size: 12px;
-  color: #ffffff; /* Customize the color of the label */
-  margin-right: 5px; /* Add some space between the label and the value */
+  color: #ffffff;
+  margin-right: 5px;
 }
 
 .block-value {
   font-weight: bold;
   font-size: 12px;
-  color: #e0aaff; /* Customize the color of the value */
+  color: #e0aaff;
+}
+
+.transaction-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  display: block; /* Allow the table to be scrollable */
+}
+
+.transaction-summary-table thead,
+.transaction-summary-table tbody {
+  display: block; /* Make thead and tbody blocks */
+}
+
+.transaction-summary-table tbody {
+  max-height: 200px; /* Adjust height as needed */
+  overflow-y: auto; /* Enable vertical scrolling for tbody */
+}
+
+.transaction-summary-table th,
+.transaction-summary-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.transaction-summary-table th {
+  font-weight: normal;
+  font-size: 12px;
+  color: #ffffff;
+  border-bottom: 1px solid #4a015c;
+}
+
+.transaction-summary-table td {
+  color: #e0aaff;
 }

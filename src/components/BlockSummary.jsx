@@ -1,22 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Utils } from 'alchemy-sdk'
 import { formatTimestamp, formatAddress } from '../helper/formatHelpers'
-
 import '../App.css'
 
 const BlockSummary = ({ selectedBlock, blockDetails }) => {
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded)
+  }
+
   return (
-    <div className='information-container'>
+    <div
+      className={`information-container ${
+        isExpanded ? 'expanded' : 'collapsed'
+      }`}
+      onClick={handleToggle}
+    >
       {selectedBlock ? (
         <>
           <div className='block-number'>Block #{selectedBlock.blockNumber}</div>
-
-          {blockDetails ? (
+          <p className='block-timestamp'>
+            {blockDetails
+              ? formatTimestamp(blockDetails.timestamp)
+              : 'Loading...'}
+          </p>
+          {isExpanded && blockDetails && (
             <>
-              <p className='block-timestamp'>
-                {formatTimestamp(blockDetails.timestamp)}
-              </p>
-              <hr className='divider'></hr>;
+              <hr className='divider'></hr>
               <table>
                 <tbody>
                   <tr>
@@ -70,8 +81,6 @@ const BlockSummary = ({ selectedBlock, blockDetails }) => {
                 </tbody>
               </table>
             </>
-          ) : (
-            <p>Loading block details...</p>
           )}
         </>
       ) : (

@@ -42,7 +42,7 @@ function App () {
         selectedBlock.blockNumber,
         alchemy
       )
-      console.log('Block Details:', blockDetails)
+      // console.log('Block Details:', blockDetails)
       setBlockDetails(blockDetails)
     }
   }, [selectedBlock])
@@ -53,7 +53,7 @@ function App () {
         selectedBlock.blockNumber,
         alchemy
       )
-      console.log('Block Transactions', blockTransactions)
+      // console.log('Block Transactions', blockTransactions)
       setTransactionDetails(blockTransactions)
     }
   }, [selectedBlock])
@@ -68,22 +68,27 @@ function App () {
 
   return (
     <div className='App'>
-      <div className='scrollable-chain-parent-container'>
-        <ScrollableChain
-          blockNumbers={blockNumbers}
-          setSelectedBlock={setSelectedBlock}
-          selectedBlock={selectedBlock}
-        />
-      </div>
-      <div className='row-container'>
-        <div className='information-parent-container'>
-          <BlockSummary
+      <div className='content-container'>
+        <div className='scrollable-chain-parent-container'>
+          <ScrollableChain
+            blockNumbers={blockNumbers}
+            setSelectedBlock={setSelectedBlock}
             selectedBlock={selectedBlock}
-            blockDetails={blockDetails}
           />
         </div>
-        <div className='information-parent-container'>
-          <TransactionSummary selectedBlock={selectedBlock} />
+        <div className='row-container'>
+          <div className='information-parent-container'>
+            <BlockSummary
+              selectedBlock={selectedBlock}
+              blockDetails={blockDetails}
+            />
+          </div>
+          <div className='information-parent-container'>
+            <TransactionSummary
+              selectedBlock={selectedBlock}
+              transactionDetails={transactionDetails}
+            />
+          </div>
         </div>
       </div>
     </div>
