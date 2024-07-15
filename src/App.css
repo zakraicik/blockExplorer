@@ -5,7 +5,13 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #10002b;
+  background: #000;
+}
+
+.logo {
+  max-height: 30vh;
+  padding: 0;
+  margin: 0;
 }
 
 .content-container {
@@ -15,7 +21,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 20px;
   box-sizing: border-box;
 }
 
@@ -53,7 +58,7 @@
   align-items: center;
   height: 10vh;
   margin: 0 15px;
-  border-radius: 15px;
+  border-radius: 80px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -90,19 +95,16 @@
 
 /* New CSS classes for gradients */
 .chain-item.selected {
-  /* background: linear-gradient(135deg, #e0aaff, #240046); */
-  background: #360568;
-  box-shadow: 0 0 10px rgba(224, 170, 255, 0.3),
-    0 0 30px rgba(224, 170, 255, 0.2);
-  border: 1px solid #e0aaff; /* Added border */
+  background: #72f491;
+  box-shadow: 0 0 10px rgba(154, 198, 197, 0.3),
+    0 0 30px rgba(154, 198, 197, 0.2);
   font-size: 20px;
   color: #ffffff;
   font-weight: bolder;
 }
 
 .chain-item.unselected {
-  background: #240046;
-  /* background: linear-gradient(135deg, #fff, #f4ebff); */
+  background: rgba(114, 244, 145, 0.28);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.1);
   font-size: 12px;
   color: #ffffff;
@@ -112,6 +114,7 @@
 /* Row container for aligning information and extra containers side by side */
 .row-container {
   display: flex;
+  flex-direction: row;
   justify-content: center; /* Center the containers */
   align-items: flex-start; /* Align the containers at the top */
   width: 80vw;
@@ -120,36 +123,37 @@
 }
 
 .information-parent-container {
-  flex: 0 0 auto; /* Allow the containers to take only the width of their content */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.block-summary-container {
+  flex: 0 1 auto; /* Allow the container to take only the width it needs */
   display: flex;
   justify-content: center;
+  width: 400px; /* Fixed width for both collapsed and expanded state */
+}
+
+.transaction-summary-container {
+  flex: 1 1 auto; /* Allow the container to take up the remaining space */
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .information-container {
   position: relative;
   padding: 20px;
-  background: #240046;
+  background: #1d1d1d;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(224, 170, 255, 0.3),
-    0 0 30px rgba(224, 170, 255, 0.2);
-  width: 500px;
   box-sizing: border-box;
   text-align: left;
   cursor: pointer;
   transition: padding 0.5s ease-in-out;
   overflow: hidden;
-  max-height: 300px;
-}
-
-.information-container.collapsed {
-  max-height: 80px;
-  padding-bottom: 0;
-  transition: max-height 1s ease-in-out, padding 0.5s ease-in-out; /* Slow down collapse */
-}
-
-.information-container.expanded {
-  max-height: 1000px; /* Adjust this value to be large enough to accommodate the expanded content */
-  transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Speed up expand */
+  width: 100%; /* Ensure the content takes up the full width */
 }
 
 .block-number {
@@ -220,4 +224,22 @@
 
 .transaction-summary-table td {
   color: #e0aaff;
+}
+
+.dummy-graph {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 100px;
+  background-color: #240046;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(224, 170, 255, 0.3),
+    0 0 30px rgba(224, 170, 255, 0.2);
+}
+
+.bar {
+  width: 20px;
+  background-color: #e0aaff;
+  transition: height 0.3s ease-in-out;
 }

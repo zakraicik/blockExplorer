@@ -2,7 +2,10 @@ import { Alchemy, Network } from 'alchemy-sdk'
 import { useEffect, useState, useCallback } from 'react'
 import ScrollableChain from './components/ScrollableChain'
 import BlockSummary from './components/BlockSummary'
+import TransactionDetail from './components/TransactionDetail'
 import TransactionSummary from './components/TransactionSummary'
+import Header from './components/Header'
+import logo from './assets/logo.png'
 
 import { getBlockDetails, getBlockTransactions } from './helper/alchemyHelpers'
 
@@ -53,7 +56,7 @@ function App () {
         selectedBlock.blockNumber,
         alchemy
       )
-      // console.log('Block Transactions', blockTransactions)
+      console.log('Block Transactions', blockTransactions)
       setTransactionDetails(blockTransactions)
     }
   }, [selectedBlock])
@@ -68,7 +71,8 @@ function App () {
 
   return (
     <div className='App'>
-      <div className='content-container'>
+      <Header />
+      {/* <div className='content-container'>
         <div className='scrollable-chain-parent-container'>
           <ScrollableChain
             blockNumbers={blockNumbers}
@@ -76,21 +80,22 @@ function App () {
             selectedBlock={selectedBlock}
           />
         </div>
+        
         <div className='row-container'>
-          <div className='information-parent-container'>
+          <div className='information-parent-container block-summary-container'>
             <BlockSummary
               selectedBlock={selectedBlock}
               blockDetails={blockDetails}
             />
           </div>
-          <div className='information-parent-container'>
+          <div className='information-parent-container transaction-summary-container'>
             <TransactionSummary
               selectedBlock={selectedBlock}
               transactionDetails={transactionDetails}
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
