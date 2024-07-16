@@ -1,9 +1,37 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
+import { Utils } from 'alchemy-sdk'
+
 import '../css/transactionSummary.css'
 
-const TransactionSummary = ({}) => {
-  let selectedBlock = true
+const TransactionSummary = ({ selectedBlock, transactionDetails }) => {
+  // Add a check to ensure transactionDetails is available before processing
+  if (!transactionDetails || !transactionDetails.receipts) {
+    return <div>Loading...</div>
+  }
+
+  const gasPriceData = transactionDetails.receipts.map(transaction =>
+    Utils.formatUnits(
+      Number(transaction.effectiveGasPrice),
+      'gwei'
+    ).toLocaleString()
+  )
+
+  const transactionIndexData = transactionDetails.receipts.map(transaction =>
+    Number(transaction.transactionIndex)
+  )
+
+  const toAddresses = transactionDetails.receipts.map(
+    transaction => transaction.to
+  )
+
+  const fromAddresses = transactionDetails.receipts.map(
+    transaction => transaction.from
+  )
+
+  const transactionHashes = transactionDetails.receipts.map(
+    transaction => transaction.transactionHash
+  )
 
   const chartOptions = {
     chart: {
@@ -11,16 +39,14 @@ const TransactionSummary = ({}) => {
     },
     series: [
       {
-        name: 'Gas Used',
-        data: [50, 75, 100, 60, 90]
-      },
-      {
         name: 'Gas Price',
-        data: [80, 60, 120, 70, 95]
+        data: gasPriceData
       }
     ],
     xaxis: {
-      categories: ['Point 1', 'Point 2', 'Point 3', 'Point 4', 'Point 5'],
+      type: 'numeric',
+      stepSize: 10,
+
       axisBorder: {
         show: true,
         color: '#6A6A6A'
@@ -31,6 +57,16 @@ const TransactionSummary = ({}) => {
       labels: {
         style: {
           colors: '#6A6A6A'
+        },
+        rotate: -90
+      },
+      title: {
+        text: 'Transaction Index (Ordered Chronologically)',
+        style: {
+          color: '#6A6A6A',
+          fontSize: '14px',
+          fontFamily: 'Arial, sans-serif',
+          fontWeight: 600
         }
       }
     },
@@ -49,6 +85,16 @@ const TransactionSummary = ({}) => {
       labels: {
         style: {
           colors: '#6A6A6A'
+        },
+        formatter: value => Math.round(value)
+      },
+      title: {
+        text: 'Gas Price (Gwei)',
+        style: {
+          color: '#6A6A6A',
+          fontSize: '14px',
+          fontFamily: 'Arial, sans-serif',
+          fontWeight: 600
         }
       }
     },
@@ -56,6 +102,34 @@ const TransactionSummary = ({}) => {
       show: true,
       labels: {
         colors: ['#6A6A6A', '#6A6A6A']
+      }
+    },
+    tooltip: {
+      custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+        const to = toAddresses[dataPointIndex]
+        const from = fromAddresses[dataPointIndex]
+        const transactionHash = transactionHashes[dataPointIndex]
+        const gasPrice = series[seriesIndex][dataPointIndex]
+
+        return (
+          '<div class="tooltip-container">' +
+          '<div><strong>Transaction Index:</strong> ' +
+          transactionIndexData[dataPointIndex] +
+          '</div>' +
+          '<div><strong>Gas Price:</strong> ' +
+          gasPrice +
+          ' Gwei</div>' +
+          '<div><strong>From:</strong> ' +
+          from +
+          '</div>' +
+          '<div><strong>To:</strong> ' +
+          to +
+          '</div>' +
+          '<div><strong>Transaction Hash:</strong> ' +
+          transactionHash +
+          '</div>' +
+          '</div>'
+        )
       }
     }
   }
@@ -65,7 +139,6 @@ const TransactionSummary = ({}) => {
       {selectedBlock ? (
         <>
           <div className='h1'>Transaction Details</div>
-
           <div className='apex-chart'>
             <Chart
               options={chartOptions}

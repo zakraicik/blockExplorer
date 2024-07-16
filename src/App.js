@@ -43,7 +43,6 @@ function App () {
         selectedBlock.blockNumber,
         alchemy
       )
-      // console.log('Block Details:', blockDetails)
       setBlockDetails(blockDetails)
     }
   }, [selectedBlock])
@@ -54,7 +53,6 @@ function App () {
         selectedBlock.blockNumber,
         alchemy
       )
-      console.log('Block Transactions', blockTransactions)
       setTransactionDetails(blockTransactions)
     }
   }, [selectedBlock])
@@ -83,8 +81,8 @@ function App () {
           blockDetails={blockDetails}
         />
         <TransactionSummary
-        // selectedBlock={selectedBlock}
-        // transactionDetails={transactionDetails}
+          selectedBlock={selectedBlock}
+          transactionDetails={transactionDetails}
         />
       </div>
     </div>
