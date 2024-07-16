@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 
+import '../css/scrollableChain.css'
+
 const ScrollableChain = ({ blockNumbers, setSelectedBlock, selectedBlock }) => {
-  // Add selectedBlock here
   const [currentIndex, setCurrentIndex] = useState(0)
   const scrollRef = useRef(null)
 
@@ -59,7 +60,10 @@ const ScrollableChain = ({ blockNumbers, setSelectedBlock, selectedBlock }) => {
               }`}
               onClick={() => handleBlockClick(block, index)}
             >
-              #{block.blockNumber}
+              <div>
+                <div className='chain-item-line-1'>Block Number</div>
+                <div className='chain-item-line-2'>{block.blockNumber}</div>
+              </div>
             </div>
           ))}
           <div className='chain-item invisible'></div>

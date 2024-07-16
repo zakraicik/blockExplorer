@@ -72,7 +72,7 @@ function App () {
   return (
     <div className='App'>
       <Header />
-      {/* <div className='content-container'>
+      <div className='content-container'>
         <div className='scrollable-chain-parent-container'>
           <ScrollableChain
             blockNumbers={blockNumbers}
@@ -80,7 +80,7 @@ function App () {
             selectedBlock={selectedBlock}
           />
         </div>
-        
+
         <div className='row-container'>
           <div className='information-parent-container block-summary-container'>
             <BlockSummary
@@ -95,7 +95,7 @@ function App () {
             />
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   )
 }

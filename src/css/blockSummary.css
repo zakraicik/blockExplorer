@@ -1,0 +1,42 @@
+.information-container {
+  position: relative;
+  padding: 20px;
+  background: #1d1d1d;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  /* width: 100%;  */
+}
+
+.block-number {
+  font-size: 20px;
+  color: #72f491;
+}
+
+.block-timestamp {
+  font-size: 12px;
+  font-style: normal;
+  color: #fff;
+}
+
+.table {
+  background: rgba(114, 244, 145, 0.28);
+  border-radius: 10px;
+  padding: 5px;
+  width: 100%;
+}
+
+.block-label {
+  font-weight: normal;
+  font-size: 12px;
+  color: #72f491;
+  margin-right: 5px;
+}
+
+.block-value {
+  font-weight: bold;
+  font-size: 12px;
+  color: #72f491;
+}
