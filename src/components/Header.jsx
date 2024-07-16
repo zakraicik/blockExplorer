@@ -8,7 +8,11 @@ const Header = () => {
     <header className='header'>
       <div className='header-row'>
         <img src={logo} alt='Logo' className='logo' />
-        <input type='text' className='search-bar' />
+        <input
+          type='text'
+          className='search-bar'
+          placeholder='Search block number'
+        />
       </div>
       <div className='header-row'>
         <div className='header-text'>

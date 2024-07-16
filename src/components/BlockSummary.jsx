@@ -6,7 +6,7 @@ import '../css/blockSummary.css'
 
 const BlockSummary = ({ selectedBlock, blockDetails }) => {
   return (
-    <div className='information-container'>
+    <div className='block-summary-information-container'>
       {selectedBlock ? (
         <>
           <div className='block-number'>Block #{selectedBlock.blockNumber}</div>

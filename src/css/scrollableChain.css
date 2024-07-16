@@ -67,21 +67,16 @@
 
 .chain-item:hover {
   transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(192, 130, 230, 0.3),
-    0 6px 6px rgba(192, 130, 230, 0.2);
 }
 
 .chain-item.selected {
   background: #72f491;
-  box-shadow: 0 0 10px rgba(154, 198, 197, 0.3),
-    0 0 30px rgba(154, 198, 197, 0.2);
   color: #ffffff;
   font-weight: bolder;
 }
 
 .chain-item.unselected {
   background: rgba(114, 244, 145, 0.28);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.1);
   color: #ffffff;
   font-weight: bold;
 }
