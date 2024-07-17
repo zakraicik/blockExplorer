@@ -1,5 +1,3 @@
-import { Utils } from 'alchemy-sdk'
-
 export async function getBlockDetails (blockNumber, alchemy) {
   try {
     const blockDetails = await alchemy.core.getBlock(blockNumber)

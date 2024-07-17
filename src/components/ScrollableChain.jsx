@@ -2,7 +2,11 @@ import React, { useState, useRef, useEffect } from 'react'
 
 import '../css/scrollableChain.css'
 
-const ScrollableChain = ({ blockNumbers, setSelectedBlock, selectedBlock }) => {
+const ScrollableChain = ({
+  blockNumbers,
+  handleBlockSelection,
+  selectedBlock
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const scrollRef = useRef(null)
 
@@ -23,7 +27,11 @@ const ScrollableChain = ({ blockNumbers, setSelectedBlock, selectedBlock }) => {
   }
 
   const handleBlockClick = (block, index) => {
-    setSelectedBlock(block)
+    if (selectedBlock && selectedBlock.blockNumber === block.blockNumber) {
+      handleBlockSelection(null)
+    } else {
+      handleBlockSelection(block)
+    }
     const blockWidth = scrollRef.current.scrollWidth / (blockNumbers.length + 2)
     scrollRef.current.scrollLeft = index * blockWidth
   }

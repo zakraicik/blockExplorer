@@ -5,7 +5,7 @@ import { RiseLoader } from 'react-spinners'
 
 import '../css/blockSummary.css'
 
-const BlockSummary = ({ selectedBlock, blockDetails }) => {
+const BlockSummary = ({ blockDetails }) => {
   if (!blockDetails) {
     return (
       <div className='block-summary-loading-container'>
@@ -20,7 +20,7 @@ const BlockSummary = ({ selectedBlock, blockDetails }) => {
   return (
     <div className='block-summary-information-container'>
       <>
-        <div className='block-number'>Block #{selectedBlock.blockNumber}</div>
+        <div className='block-number'>Block #{blockDetails.number}</div>
         <p className='block-timestamp'>
           {formatTimestamp(blockDetails.timestamp)}
         </p>

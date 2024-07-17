@@ -57,6 +57,12 @@ function App () {
     }
   }, [blockDetails])
 
+  const handleBlockSelection = block => {
+    setSelectedBlock(block)
+    setBlockDetails(null)
+    setTransactionDetails(null)
+  }
+
   useEffect(() => {
     fetchBlockDetails()
   }, [fetchBlockDetails])
@@ -71,21 +77,15 @@ function App () {
       <div className='scrollable-chain-parent-container'>
         <ScrollableChain
           blockNumbers={blockNumbers}
-          setSelectedBlock={setSelectedBlock}
+          handleBlockSelection={handleBlockSelection}
           selectedBlock={selectedBlock}
         />
       </div>
       <div className='row-container'>
         {selectedBlock ? (
           <>
-            <BlockSummary
-              selectedBlock={selectedBlock}
-              blockDetails={blockDetails}
-            />
-            <TransactionSummary
-              selectedBlock={selectedBlock}
-              transactionDetails={transactionDetails}
-            />
+            <BlockSummary blockDetails={blockDetails} />
+            <TransactionSummary transactionDetails={transactionDetails} />
           </>
         ) : (
           <div className='empty-information-container'>

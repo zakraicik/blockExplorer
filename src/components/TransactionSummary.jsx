@@ -5,7 +5,7 @@ import { RiseLoader } from 'react-spinners'
 
 import '../css/transactionSummary.css'
 
-const TransactionSummary = ({ selectedBlock, transactionDetails }) => {
+const TransactionSummary = ({ transactionDetails }) => {
   if (!transactionDetails) {
     return (
       <div className='transaction-summary-loading-container'>
