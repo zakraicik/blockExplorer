@@ -1,128 +1,51 @@
 # Ethereum Block Explorer
 
-The lessons this week covered the Ethereum JSON-RPC API and the `ethers.js` library giving us the ability to query the Ethereum blockchain and make transactions!
+**chainTrail** is a prototype block explorer designed to visualize the Ethereum blockchain in its true form—as a chain. Each item in the chain represents a block, and each block is clickable. When a block is clicked, the UI displays detailed information about the block and visualizes the transactions within it. Hovering over the transaction plot reveals a tooltip with additional information about each transaction, providing an interactive and informative experience for users.
 
-Let's put that knowledge to the test by building our very own **Ethereum Block Explorer**!
+## Features
 
-Blockexplorers give us the ability to view lots of different information about the blockchain including data about:
-  * the blockchain network itself
-  * blocks in the blockchain
-  * transactions in a block
-  * accounts
-  * and many other things
-  
-[Etherscan](https://etherscan.io/) is a good example of an Ethereum blockexplorer. Check it out to get familiar with how blockexplorers generally work.
+### Block Chain Visualization
 
-This particular project is very much open-ended. We'll add some challenges here to get your imagination going, but use Etherscan as a guide for features you might consider building in your project.
+- **True Chain Representation**: The Ethereum blockchain is visualized as a chain, making it intuitive for users to understand the structure and relationship between blocks.
+- **Interactive Blocks**: Each block in the chain is clickable, allowing users to explore the details of specific blocks.
 
-## Getting Started
+### Block Details
 
-Clone this project to pull down some basic starter code.
+- **Comprehensive Block Information**: Once a block is clicked, detailed information about the block is displayed, including block number, timestamp, miner, difficulty, total gas used, and more.
+- **Transaction Visualization**: The transactions within the selected block are visualized on a plot, showing transaction values and gas prices.
 
-After that cd into the base directory of the project and run `npm install` to download all the project dependencies.
+### Transaction Tooltip
 
-In this project we chose to use React for a front-end and added minimal front-end code to get you going, but feel free to use any front-end stack you like.
+- **Detailed Transaction Information**: Hovering over the transaction plot reveals a tooltip with additional details about each transaction, such as transaction index, gas price, from and to addresses, and transaction hash.
 
-Unlike the lessons this week that used the Ethereum JSON-RPC API and the `ethers.js` library to communicate with the Ethereum network, the starter code in this project uses the [AlchemySDK](https://docs.alchemy.com/reference/alchemy-sdk-quickstart?a=eth-bootcamp). The AlchemySDK's core package wraps almost all of the `ethers.js` provider functionality that we learned about and should feel very familiar to you. 
+## Skills Demonstrated
 
-For example, the following `ethers.js` code
-```js
-const blockNumber = await provider.getBlockNumber();
-```
-can be written using the AlchemySDK like so:
-```js
-const blockNumber = await alchemy.core.getBlockNumber()
-```
-Another `ethers.js ` example
-```js
-const transcations = await provider.getBlockWithTransactions(SOME_BLOCK_NUMBER)
-```
-translates to
-```js
-const transactions = await alchemy.core.getBlockWithTransactions(SOME_BLOCK_NUMBER)
-```
-and so on.
+### External API Interaction
 
-There are some `ethers.js` provider functions that are not often-used and therefore not included in `alchemy.core`. But if you ever need the full ethers provider functionality you can access the provider directly with the following code:
-```js
-const ethersProvider = await alchemy.config.getProvider();
-```
+- **Alchemy API**: The project demonstrates the ability to interact with external APIs, specifically the Alchemy API, to fetch real-time blockchain data.
+- **Efficient API Usage**: The implementation shows an understanding of how to efficiently manage API calls to avoid unnecessary requests and reduce load times.
 
-You can find lots of good docs on the AlchemySDK here:
-  * [API Quickstart](https://docs.alchemy.com/reference/alchemy-sdk-quickstart?a=eth-bootcamp)
-  * [API Overview](https://docs.alchemy.com/reference/api-overview?a=eth-bootcamp)
+### Handling Complex Data
 
-Alright, without further ado, let's get started!
+- **Nested JSONs and Lists**: The project showcases the ability to work with complex data structures, such as nested JSON objects and lists of lists, to extract and present relevant information.
+- **Data Processing**: It demonstrates the ability to process and transform raw blockchain data into a user-friendly format for visualization and analysis.
 
-## 1. Create a unique Alchemy API key
+### Front-End Development
 
-If you have not already done so, create a unique Alchemy API Mainnet key
-for your project as [described here](https://docs.alchemy.com/reference/api-overview?a=eth-bootcamp).
+- **React**: The user interface is built using React, showcasing familiarity with front-end development frameworks.
+- **Interactive UI Components**: The project includes interactive UI components, such as clickable blocks and hoverable tooltips, enhancing the user experience.
+- **Data Visualization**: It leverages data visualization libraries, such as ApexCharts, to create informative and visually appealing charts.
 
-## 2. Add your API key to as an environment variable for the project
+## Implementation Notes
 
-Create an empty `.env` file in the base directory of this project.
+### Simplified Scope
 
-Add the following line to the `.env` file replacing `YOUR_ALCHEMY_API_KEY` with your api key.
+- **Limited Block Display**: For illustration purposes, the explorer only displays the most recent 5 blocks. This simplification helps keep the UI focused and the data manageable.
+- **Transaction Limit**: To limit API calls and ensure performance, only the first 10 transactions for each selected block are shown. This approach strikes a balance between providing useful information and maintaining responsiveness.
 
-```sh
-REACT_APP_ALCHEMY_API_KEY=YOUR_ALCHEMY_API_KEY
-```
+### Usage
 
-Do not remove the `REACT_APP_` prefix. React uses that to import env variables.
+- **Educational Tool**: chainTrail serves as an educational tool to help users understand the Ethereum blockchain and how block explorers work.
+- **Prototype**: As a prototype, it showcases key features and skills but is not intended for production use.
 
-**⚠️ Note**
-
-> Your Alchemy API Mainnet Key is a sensitive piece of data. If we were\
-> building an enterprise app to conquer the world we would never place\
-> this sensitive data in the client code of our blockexplorer project that\
-> could potentially be read by anyone.
->
-> But hey, we're just learning this stuff right now, not conquering anything\
-> yet! :-) It won't be the end of the world to put the Alchemy API key in our\
-> front-end code for this project.
-
-## 3. Start the webserver
-
-`npm start`
-
-Running the command above will run the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The webpage will automatically reload when you make code changes.
-
-What you'll see in the browser is Ethereum Mainnet's current block number. Not very exciting, but that's where you come in to save the day!
-
-## 4. Make the blockexplorer cool!
-
-The starter code pulls down the current block number for you.
-
-Can you get more information about the current block and display it in the page?
-Take a look at [alchemy.core.getBlock()](https://docs.alchemy.com/reference/sdk-getblock?a=eth-bootcamp) for how you might go about that.
-
-Blocks contains transactions. Can you get the list of transactions for a given block? Can you use [alchemy.core.getBlockWithTransactions()](https://docs.alchemy.com/reference/sdk-getblockwithtransactions?a=eth-bootcamp) for this?
-
-How about getting details for individual transactions? The [alchemy.core.getTransactionReceipt()](https://docs.alchemy.com/reference/sdk-gettransactionreceipt?a=eth-bootcamp) looks handy.
-
-## 5. More ideas to think about
-
-- Connecting the dots.
-  - Allow users to click on a block listed in the webpage to get the block's details including its list of transactions
-  - From the list of transactions allow users to click on specific transactions to get the details of the transaction
-- Make an accounts page where a user can look up their balance or someone else's balance
-
-## 6. Supercharge your blockexplorer using AlchemySDK's specialized APIs
-
-By using the AlchemySDK you can really supercharge your projects with additional API functionality that isn't included in the `ethers.js` package including:
-  * NFT methods
-  * WebSocket methods
-  * Alchemy's Transact API functionality
-  * endpoints for using Alchemy's Notify Webhooks
-
-Read more about the above in the [Alchemy SDK Surface docs](https://docs.alchemy.com/reference/alchemy-sdk-api-surface-overview?a=eth-bootcamp). Using the SDK can implement the following features?
-
-- Given a contract address and token id, can you get the NFT's metadata?
-- What is the floor price of an NFT right now?
-- Did a pending transaction get mined?
-- What transfers did an address receive this year?
-
-Good luck and have fun!
+chainTrail is a powerful demonstration of blockchain exploration capabilities, combining API interaction, complex data handling, and front-end development into a cohesive and interactive application.
