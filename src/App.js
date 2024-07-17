@@ -76,14 +76,22 @@ function App () {
         />
       </div>
       <div className='row-container'>
-        <BlockSummary
-          selectedBlock={selectedBlock}
-          blockDetails={blockDetails}
-        />
-        <TransactionSummary
-          selectedBlock={selectedBlock}
-          transactionDetails={transactionDetails}
-        />
+        {selectedBlock ? (
+          <>
+            <BlockSummary
+              selectedBlock={selectedBlock}
+              blockDetails={blockDetails}
+            />
+            <TransactionSummary
+              selectedBlock={selectedBlock}
+              transactionDetails={transactionDetails}
+            />
+          </>
+        ) : (
+          <div className='empty-information-container'>
+            <div className='no-selection'> test</div>
+          </div>
+        )}
       </div>
     </div>
   )

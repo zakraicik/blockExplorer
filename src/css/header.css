@@ -1,7 +1,6 @@
 .header {
   background-color: #000;
   color: #72f491;
-  padding: 0;
   width: 100%; /* Ensure the header spans the entire width of the screen */
   position: relative; /* Ensure the header stays at the top */
   top: 0;
@@ -12,7 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 75px; /* Adjust padding as needed */
+  padding: 25px 75px;
 }
 
 .logo {

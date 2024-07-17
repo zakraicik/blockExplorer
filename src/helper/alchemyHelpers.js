@@ -12,7 +12,7 @@ export async function getBlockDetails (blockNumber, alchemy) {
 
 export async function getBlockTransactions (blockDetails, alchemy) {
   try {
-    const transactionHashes = blockDetails.transactions.slice(0, 3)
+    const transactionHashes = blockDetails.transactions.slice(0, 30)
 
     const transactionPromises = transactionHashes.map(hash =>
       alchemy.core.getTransaction(hash)

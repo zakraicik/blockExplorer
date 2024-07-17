@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Chart from 'react-apexcharts'
 import { Utils } from 'alchemy-sdk'
+import { RiseLoader } from 'react-spinners'
 
 import '../css/transactionSummary.css'
 
 const TransactionSummary = ({ selectedBlock, transactionDetails }) => {
-  // Add a check to ensure transactionDetails is available before processing
-  useEffect(() => {
-    console.log('Transaction Details: ', transactionDetails)
-  }, [transactionDetails])
-
   if (!transactionDetails) {
-    return <div>Loading...</div>
+    return (
+      <div className='transaction-summary-loading-container'>
+        <div>
+          <RiseLoader color='#72f491' size='20' />
+          <p className='h1'>Loading transaction details</p>
+        </div>
+      </div>
+    )
   }
 
   const valueData = transactionDetails.map(transaction =>
@@ -50,7 +53,7 @@ const TransactionSummary = ({ selectedBlock, transactionDetails }) => {
     ],
     xaxis: {
       type: 'numeric',
-      stepSize: 10,
+      stepSize: 1,
 
       axisBorder: {
         show: true,
@@ -165,21 +168,17 @@ const TransactionSummary = ({ selectedBlock, transactionDetails }) => {
 
   return (
     <div className='transaction-summary-information-container'>
-      {selectedBlock ? (
-        <>
-          <div className='h1'>Transaction Details</div>
-          <div className='apex-chart'>
-            <Chart
-              options={chartOptions}
-              series={chartOptions.series}
-              type='line'
-              height='250'
-            />
-          </div>
-        </>
-      ) : (
-        <p>Select a block to see more information</p>
-      )}
+      <>
+        <div className='h1'>Transaction Details</div>
+        <div className='apex-chart'>
+          <Chart
+            options={chartOptions}
+            series={chartOptions.series}
+            type='line'
+            height='250'
+          />
+        </div>
+      </>
     </div>
   )
 }
