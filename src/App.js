@@ -31,6 +31,8 @@ function App () {
       }
 
       setBlockNumbers(blockNumbersArray.reverse())
+
+      handleBlockSelection(blockNumbersArray.at(-1))
     }
 
     getBlockNumbers()
