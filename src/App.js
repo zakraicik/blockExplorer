@@ -22,7 +22,6 @@ function App () {
   const [blockDetails, setBlockDetails] = useState(null)
   const [transactionDetails, setTransactionDetails] = useState(null)
 
-  // Block numbers
   useEffect(() => {
     async function getBlockNumbers () {
       const currentBlockNumber = await alchemy.core.getBlockNumber()
@@ -48,14 +47,15 @@ function App () {
   }, [selectedBlock])
 
   const fetchBlockTransactions = useCallback(async () => {
-    if (selectedBlock) {
+    if (blockDetails) {
       const blockTransactions = await getBlockTransactions(
-        selectedBlock.blockNumber,
+        blockDetails,
         alchemy
       )
+
       setTransactionDetails(blockTransactions)
     }
-  }, [selectedBlock])
+  }, [blockDetails])
 
   useEffect(() => {
     fetchBlockDetails()

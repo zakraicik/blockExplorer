@@ -10,27 +10,19 @@ export async function getBlockDetails (blockNumber, alchemy) {
   }
 }
 
-export async function getBlockTransactions (blockNumber, alchemy) {
+export async function getBlockTransactions (blockDetails, alchemy) {
   try {
-    const params = {
-      blockNumber: Utils.hexlify(blockNumber)
-    }
+    const transactionHashes = blockDetails.transactions.slice(0, 3)
 
-    const transactionDetails = await alchemy.core.getTransactionReceipts(params)
+    const transactionPromises = transactionHashes.map(hash =>
+      alchemy.core.getTransaction(hash)
+    )
+
+    const transactionDetails = await Promise.all(transactionPromises)
 
     return transactionDetails
   } catch (error) {
-    console.error('Error fetching block transactions:', error)
-    return null
-  }
-}
-
-export async function getGasPrice (alchemy) {
-  try {
-    const gasPrice = await alchemy.core.getGasPrice()
-    return gasPrice
-  } catch (error) {
-    console.error('Error fetching gas price', error)
+    console.error('Error fetching transaction details:', error)
     return null
   }
 }
