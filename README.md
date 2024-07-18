@@ -1,5 +1,7 @@
 # Ethereum Block Explorer
 
+![Ethereum Block Explorer](./public/appPreview.png)
+
 **chainTrail** is a prototype block explorer designed to visualize the Ethereum blockchain in its true form—as a chain. Each item in the chain represents a block, and each block is clickable. When a block is clicked, the UI displays detailed information about the block and visualizes the transactions within it. Hovering over the transaction plot reveals a tooltip with additional information about each transaction, providing an interactive and informative experience for users.
 
 ## Features
