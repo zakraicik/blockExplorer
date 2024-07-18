@@ -1,4 +1,4 @@
-# Ethereum Block Explorer
+# chainTrail
 
 ![Ethereum Block Explorer](./public/appPreview.png)
 
